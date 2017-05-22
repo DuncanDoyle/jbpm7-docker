@@ -6,13 +6,14 @@ ADD https://repository.jboss.org/nexus/service/local/artifact/maven/redirect?r=s
 ADD https://repository.jboss.org/nexus/service/local/artifact/maven/redirect?r=snapshots&g=org.jbpm&a=jbpm-wb-case-mgmt-showcase&v=7.0.0-SNAPSHOT&e=war&c=wildfly10 /opt/eap/standalone/deployments/jbpm-casemgmt.war
 ADD https://repository.jboss.org/nexus/service/local/artifact/maven/redirect?r=snapshots&g=org.kie.server&a=kie-server&v=7.0.0-SNAPSHOT&e=war&c=ee7 /opt/eap/standalone/deployments/kie-server.war
 
+COPY contrib/standalone.conf /opt/eap/bin/standalone.conf
 COPY contrib/standalone-full-eap-7.0.0.xml /opt/eap/standalone/configuration/standalone-openshift.xml
 COPY contrib/users.properties /opt/eap/standalone/configuration/users.properties
 COPY contrib/roles.properties /opt/eap/standalone/configuration/roles.properties
 
 USER root
-RUN chown jboss:root /opt/eap/standalone/deployments/jbpm-console.war /opt/eap/standalone/deployments/jbpm-casemgmt.war /opt/eap/standalone/deployments/kie-server.war /opt/eap/standalone/configuration/standalone-openshift.xml /opt/eap/standalone/configuration/users.properties /opt/eap/standalone/configuration/roles.properties
-RUN chmod 644 /opt/eap/standalone/deployments/jbpm-console.war /opt/eap/standalone/deployments/jbpm-casemgmt.war /opt/eap/standalone/deployments/kie-server.war /opt/eap/standalone/configuration/standalone-openshift.xml /opt/eap/standalone/configuration/users.properties /opt/eap/standalone/configuration/roles.properties
+RUN chown jboss:root /opt/eap/standalone/deployments/jbpm-console.war /opt/eap/standalone/deployments/jbpm-casemgmt.war /opt/eap/standalone/deployments/kie-server.war /opt/eap/bin/standalone.conf /opt/eap/standalone/configuration/standalone-openshift.xml /opt/eap/standalone/configuration/users.properties /opt/eap/standalone/configuration/roles.properties
+RUN chmod 644 /opt/eap/standalone/deployments/jbpm-console.war /opt/eap/standalone/deployments/jbpm-casemgmt.war /opt/eap/standalone/deployments/kie-server.war /opt/eap/bin/standalone.conf /opt/eap/standalone/configuration/standalone-openshift.xml /opt/eap/standalone/configuration/users.properties /opt/eap/standalone/configuration/roles.properties
 USER jboss
 
 
